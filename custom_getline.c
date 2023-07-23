@@ -9,12 +9,12 @@
  */
 static int read_input(char *buffer, int buffer_size)
 {
-	int characters_read = read(STDIN_FILENO, buffer, buffer_size);
+	int characters_read;
+	characters_read = read(STDIN_FILENO, buffer, buffer_size);
 
 	if (characters_read <= 0)
-	{
 		return (-1);
-	}
+
 	return (characters_read);
 }
 
