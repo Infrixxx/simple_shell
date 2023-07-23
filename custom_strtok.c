@@ -1,60 +1,46 @@
-#include "shell.h"
-
 /**
- * custom_strtok - Tokenize a string into tokens based on delimiters.
+ * custom_strtok - Custom implementation of strtok.
  * @str: The string to tokenize.
- * @delimiters: The delimiters to use for tokenization.
+ * @delimiters: The delimiters used to tokenize the string.
  *
- * Return: A pointer to the next token, or NULL if no more tokens are found.
+ * Return: A pointer to the next token found in the string, or NULL if no more tokens are found.
  */
 char *custom_strtok(char *str, const char *delimiters)
 {
-    static char *next_token = NULL;
-    char *token_start = NULL;
+	static char *last_token;
+	static int last_len;
 
-    if (str)
-    {
-        token_start = str;
-    }
-    else if (next_token)
-    {
-        token_start = next_token;
-    }
-    else
-    {
-        return NULL;
-    }
+	if (str)
+	{
+		last_token = str;
+		last_len = 0;
+	}
 
-    while (*token_start && strchr(delimiters, *token_start))
-    {
-        token_start++;
-    }
+	if (!last_token || last_len == -1)
+		return NULL;
 
-    if (*token_start)
-    {
+	char *token_start = last_token;
+	char *token_end = NULL;
+	int i, j;
 
-        char *token_end = token_start;
-        while (*token_end && !strchr(delimiters, *token_end))
-        {
-            token_end++;
-        }
+	for (i = last_len; str[i]; i++)
+	{
+		for (j = 0; delimiters[j]; j++)
+		{
+			if (str[i] == delimiters[j])
+			{
+				str[i] = '\0';
+				token_end = &str[i + 1];
+				break;
+			}
+		}
 
-        if (*token_end)
-        {
-            *token_end = '\0';
+		if (token_end)
+			break;
+	}
 
-            next_token = token_end + 1;
-        }
-        else
-        {
-            next_token = NULL;
-        }
+	last_len = (token_end) ? (int)(token_end - str) : -1;
+	last_token = token_end;
 
-        return token_start;
-    }
-    else
-    {
-        next_token = NULL;
-        return NULL;
-    }
+	return token_start;
 }
