@@ -18,5 +18,6 @@
 void display_prompt();
 char *read_command();
 void execute_command(char *command);
+int check_executable(char *command);
 
 #endif
