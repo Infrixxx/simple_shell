@@ -91,19 +91,19 @@ pid_t pid = fork();
 
 if (pid == 0) /* Child process */
 {
-    if (execve(args[0], args, environ) == -1)
-    {
-	perror("Error");
-	exit(EXIT_FAILURE);
-    }
+if (execve(args[0], args, environ) == -1)
+{
+perror("Error");
+exit(EXIT_FAILURE);
+}
 }
 else if (pid < 0)
 {
-    perror("Fork Error");
+perror("Fork Error");
 }
 else
 {
-    wait(NULL); /* Parent process waits for child to complete */
+wait(NULL); /* Parent process waits for child to complete */
 }
 }
 
