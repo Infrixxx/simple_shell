@@ -7,7 +7,8 @@
 */
 void execute_command(char *command)
 {
-		char **args = tokenize_command(command);
+	char **args = tokenize_command(command);
+
 	if (!args)
 	{
 		perror("Memory Allocation Error");
