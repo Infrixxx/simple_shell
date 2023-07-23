@@ -9,22 +9,22 @@
 */
 char **tokenize_command(char *command)
 {
-    char **args = malloc(BUFFER_SIZE * sizeof(char *));
-    int i = 0;
+char **args = malloc(BUFFER_SIZE * sizeof(char *));
+int i = 0;
 
-    if (!args)
-    {
-        return NULL;
-    }
+if (!args)
+{
+return NULL;
+}
 
-    char *token = strtok(command, " ");
-    while (token != NULL)
-    {
-        args[i] = token;
-        i++;
-        token = strtok(NULL, " ");
-    }
-    args[i] = NULL; /* Set the last element of the args array to NULL */
+char *token = strtok(command, " ");
+while (token != NULL)
+{
+args[i] = token;
+i++;
+token = strtok(NULL, " ");
+}
+args[i] = NULL; /* Set the last element of the args array to NULL */
 
-    return args;
+return args;
 }
