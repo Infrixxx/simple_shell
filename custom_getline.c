@@ -4,6 +4,7 @@
 * read_input - Read input from the standard input into a buffer.
 * Return: Number of characters read, or -1 on failure.
 */
+
 static int read_input(char *buffer, int buffer_size)
 {
 int characters_read = read(STDIN_FILENO, buffer, buffer_size);
