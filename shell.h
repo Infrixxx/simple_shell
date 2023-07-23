@@ -22,4 +22,4 @@ char **tokenize_command(char *command);
 void execute_command_with_args(char **args);
 int check_executable(char *command);
 
-#endif
+#endif /* SHELL_H */
