@@ -5,7 +5,7 @@ Project to built shell from scratch
 To be able to incorporate current knowledge of C to build complex projects
 
 
-`## Files : ##`
+## Files : ##
 
 1. `check_executable.c`: This file contains the implementation of the `check_executable` function, which checks if a given command is an executable file.
 
