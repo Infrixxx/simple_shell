@@ -78,21 +78,4 @@ void execute_command_with_args(char **args)
 	{
 		wait(NULL);
 	}
-	char *command;
-
-	while (1)
-	{
-		display_prompt();
-		command = read_command();
-
-		if (!command)
-		{
-			printf("\n");
-			break;
-		}
-
-		execute_command(command);
-		free(command);
-	}
-	return (EXIT_SUCCESS);
 }
