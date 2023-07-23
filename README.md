@@ -25,7 +25,7 @@ To be able to incorporate current knowledge of C to build complex projects
 
 9. `tokenize_command.c`: This file contains the implementation of the `tokenize_command` function, which tokenizes a command into individual arguments.
 
-10. `env_builtin.c`: Contains the implementation of the `env_builtin()` function, which prints the current environment variables. 
+10. `env_builtin.c`: Contains the implementation of the `env_builtin()` function, which prints the current environment variables.
 
 11. `custom_getline.c`: This file contains the implementation of the `custom_getline(void)` function, which reads input from the standard input using a buffer to minimize the number of read system calls.
 
