@@ -42,6 +42,7 @@ char **tokenize_command(char *command)
 
 	char *token = strtok(command, " ");
 	while (token != NULL)
+
 	{
 		args[i] = token;
 		i++;
@@ -76,7 +77,6 @@ void execute_command_with_args(char **args)
 	{
 		wait(NULL);
 	}
-	=======
 	char *command;
 
 	while (1)
