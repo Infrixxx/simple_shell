@@ -18,5 +18,6 @@ void execute_command(char *command)
 	{
 		execute_command_with_args(args);
 	}
+	execute_command_with_args(args);
 	free(args);
 }

@@ -7,6 +7,12 @@
 
 void execute_command_with_args(char **args)
 {
+	if (!check_executable(args[0]))
+	{
+		printf("Command not found: %s\n", args[0]);
+		return;
+	}
+
 	pid_t pid = fork();
 
 	if (pid == 0)
