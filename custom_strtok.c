@@ -3,7 +3,7 @@
  * @str: The string to tokenize.
  * @delimiters: The delimiters used to tokenize the string.
  *
- * Return: A pointer to the next token found in the string, or NULL if no more tokens are found.
+ * Return: A pointer to the next token found in the string, or NULL.
  */
 char *custom_strtok(char *str, const char *delimiters)
 {
@@ -17,7 +17,7 @@ char *custom_strtok(char *str, const char *delimiters)
 	}
 
 	if (!last_token || last_len == -1)
-		return NULL;
+		return (NULL);
 
 	char *token_start = last_token;
 	char *token_end = NULL;
@@ -42,5 +42,5 @@ char *custom_strtok(char *str, const char *delimiters)
 	last_len = (token_end) ? (int)(token_end - str) : -1;
 	last_token = token_end;
 
-	return token_start;
+	return (token_start);
 }
