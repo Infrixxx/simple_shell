@@ -3,6 +3,7 @@
  * main - Entry point for the Simple Shell program.
  * Return:EXIT_SUCCESS (0) to indicate successful termination.
  */
+
 int main(void)
 {
 char *command;
@@ -28,6 +29,7 @@ return (EXIT_SUCCESS);
 /**
 * display_prompt - Display the shell prompt
 */
+
 void display_prompt(void)
 {
 printf("#cisfun$ ");
@@ -38,6 +40,7 @@ printf("#cisfun$ ");
 *
 * Return: The command entered by the user or NULL on "end of file" (Ctrl+D)
 */
+
 char *read_command(void)
 {
 	char *buffer = NULL;
@@ -57,32 +60,54 @@ return (buffer);
 }
 
 /**
-* execute_command - Execute the given command
-* @command: The command to execute
-*/
+ * execute_command - Execute the given command with arguments
+ * @command: The command to execute
+ */
+
 void execute_command(char *command)
 {
-if (check_executable(command))
+char *token;
+char **args = malloc(BUFFER_SIZE * sizeof(char *));
+int i = 0;
+
+if (!args)
+{
+perror("Memory Allocation Error");
+return;
+}
+
+token = strtok(command, " ");
+while (token != NULL)
+{
+args[i] = token;
+i++;
+token = strtok(NULL, " ");
+}
+args[i] = NULL; /* Set the last element of the args array to NULL */
+
+if (check_executable(args[0]))
 {
 pid_t pid = fork();
 
 if (pid == 0) /* Child process */
 {
-if (execve(command, NULL, environ) == -1)
-{
-perror("Error");
-exit(EXIT_FAILURE);
-}
+    if (execve(args[0], args, environ) == -1)
+    {
+	perror("Error");
+	exit(EXIT_FAILURE);
+    }
 }
 else if (pid < 0)
 {
-perror("Fork Error");
+    perror("Fork Error");
 }
 else
 {
-wait(NULL); /* Parent process waits for child to complete */
+    wait(NULL); /* Parent process waits for child to complete */
 }
 }
+
+free(args);
 }
 
 /**
@@ -91,6 +116,7 @@ wait(NULL); /* Parent process waits for child to complete */
 *
 * Return: 1 if executable is found, 0 otherwise
 */
+
 int check_executable(char *command)
 {
 if (access(command, X_OK) == 0)
