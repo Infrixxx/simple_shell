@@ -46,11 +46,11 @@ characters = getline(&buffer, &bufsize, stdin);
 if (characters == EOF)
 {
 free(buffer);
-return NULL;
+return (NULL);
 }
 
 buffer[characters - 1] = '\0'; /* Remove the trailing newline */
-return buffer;
+return (buffer);
 }
 
 /**
@@ -91,10 +91,10 @@ wait(NULL); /* Parent process waits for child to complete */
 int check_executable(char *command)
 {
 if (access(command, X_OK) == 0)
-return 1;
+return (1);
 else
 {
 printf("%s: No such file or directory\n", command);
-return 0;
+return (0);
 }
 }
