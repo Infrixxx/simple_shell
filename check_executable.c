@@ -11,7 +11,6 @@ int check_executable(char *command)
 {
 	if (access(command, X_OK) == 0)
 		return (1);
-	else
 	{
 		printf("%s: No such file or directory\n", command);
 		return (0);
