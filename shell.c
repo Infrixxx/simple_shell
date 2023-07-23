@@ -7,7 +7,6 @@
 */
 void execute_command(char *command)
 {
-	<<<<<<< HEAD
 		char **args = tokenize_command(command);
 	if (!args)
 	{
@@ -95,6 +94,4 @@ void execute_command_with_args(char **args)
 		free(command);
 	}
 	return (EXIT_SUCCESS);
-	>>>>>>> 
-		refs/remotes/origin/master
 }
