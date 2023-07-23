@@ -26,7 +26,7 @@ static int read_input(char *buffer, int buffer_size)
  */
 static char *process_input(char *buffer, int buffer_size)
 {
-	static int buffer_index = 0;
+	static int buffer_index;
 	char *line = NULL;
 	int i = 0;
 
