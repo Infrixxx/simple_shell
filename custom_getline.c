@@ -76,6 +76,7 @@ static char *process_input(char *buffer, int buffer_size)
 static int realloc_line(char **line, int *i)
 {
 	char *new_line = realloc(*line, (*i + LINE_BUFFER_SIZE) * sizeof(char));
+
 	if (!new_line)
 	{
 		perror("Memory Allocation Error");
