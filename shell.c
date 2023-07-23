@@ -1,5 +1,8 @@
 #include "shell.h"
-
+/**
+ * main - Entry point for the Simple Shell program.
+ * Return:EXIT_SUCCESS (0) to indicate successful termination.
+ */
 int main(void)
 {
 char *command;
@@ -37,9 +40,9 @@ printf("#cisfun$ ");
 */
 char *read_command(void)
 {
-char *buffer = NULL;
-size_t bufsize = 0;
-int characters;
+	char *buffer = NULL;
+	size_t bufsize = 0;
+	int characters;
 
 characters = getline(&buffer, &bufsize, stdin);
 
