@@ -53,18 +53,23 @@ static char *process_input(char *buffer, int buffer_size)
 		i++;
 		buffer_index++;
 
-		if (i >= LINE_BUFFER_SIZE && !(line = realloc(line, (i + LINE_BUFFER_SIZE) * sizeof(char))))
+		if (i >= LINE_BUFFER_SIZE)
 		{
-			perror("Memory Allocation Error");
-			return (NULL);
+			if (!(line = realloc(line, (i + LINE_BUFFER_SIZE) * sizeof(char))))
+			{
+				perror("Memory Allocation Error");
+				return (NULL);
+			}
 		}
 	}
 
 	if (buffer_index >= buffer_size)
 		buffer_index = 0;
 
+
 	return (line);
 }
+
 /**
  * custom_getline - Read a line of input from the standard input.
  *
@@ -75,9 +80,9 @@ char *custom_getline(void)
 {
 	static char buffer[BUFFER_SIZE];
 	int characters_read = read_input(buffer, BUFFER_SIZE);
+	
 	if (characters_read <= 0)
-	{
 		return (NULL);
-	}
+
 	return (process_input(buffer, characters_read));
 }
