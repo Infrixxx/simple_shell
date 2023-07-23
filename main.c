@@ -6,22 +6,22 @@
 
 int main(void)
 {
-char *command;
+	char *command;
 
-while (1)
-{
-display_prompt();
-command = read_command();
+	while (1)
+	{
+		display_prompt();
+		command = read_command();
 
-if (!command)
-{
-printf("\n");
-break;
-}
+		if (!command)
+		{
+			printf("\n");
+			break;
+		}
 
-execute_command(command);
-free(command);
-}
+		execute_command(command);
+		free(command);
+	}	
 
 return (EXIT_SUCCESS);
 }
