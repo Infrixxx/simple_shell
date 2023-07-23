@@ -1,7 +1,7 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
-/*# Libraries#*/
+/*Libraries*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,14 +10,16 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-/*# MACROS #*/
+/*MACROS */
 
 #define BUFFER_SIZE 1024
 
 /*Function prototypes*/
-void display_prompt();
-char *read_command();
+void display_prompt(void);
+char *read_command(void);
 void execute_command(char *command);
+char **tokenize_command(char *command);
+void execute_command_with_args(char **args);
 int check_executable(char *command);
 
 #endif
