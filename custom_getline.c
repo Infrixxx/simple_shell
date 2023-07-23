@@ -11,7 +11,6 @@ char *custom_getline(void)
 	static char buffer[BUFFER_SIZE];
 	static int buffer_index;
 	static int characters_read;
-	
 	char *line = NULL;
 	int i = 0;
 
@@ -19,18 +18,16 @@ char *custom_getline(void)
 	{
 		characters_read = read(STDIN_FILENO, buffer, BUFFER_SIZE);
 		buffer_index = 0;
-
 		if (characters_read <= 0)
 		{
-			return NULL;
+			return (NULL);
 		}
 	}
-
 	line = malloc(BUFFER_SIZE * sizeof(char));
 	if (!line)
 	{
 		perror("Memory Allocation Error");
-		return NULL;
+		return (NULL);
 	}
 
 	while (buffer_index < characters_read)
@@ -41,11 +38,9 @@ char *custom_getline(void)
 			buffer_index++;
 			return (line);
 		}
-
 		line[i] = buffer[buffer_index];
 		i++;
 		buffer_index++;
-		
 		if (i >= BUFFER_SIZE)
 		{
 			line = realloc(line, (i + BUFFER_SIZE) * sizeof(char));
@@ -61,5 +56,5 @@ char *custom_getline(void)
 		characters_read = 0;
 		buffer_index = 0;
 	}
-	return (line); 
+	return (line);
 }
