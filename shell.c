@@ -2,98 +2,98 @@
 #include "shell.h"
 
 /**
- * execute_command - Execute the given command
- * @command: The command to execute
- */
+* execute_command - Execute the given command
+* @command: The command to execute
+*/
 void execute_command(char *command)
 {
 <<<<<<< HEAD
-    char **args = tokenize_command(command);
+char **args = tokenize_command(command);
 
-    if (!args)
-    {
-        perror("Memory Allocation Error");
-        return;
-    }
+if (!args)
+{
+perror("Memory Allocation Error");
+return;
+}
 
-    if (check_executable(args[0]))
-    {
-        execute_command_with_args(args);
-    }
+if (check_executable(args[0]))
+{
+execute_command_with_args(args);
+}
 
-    free(args);
+free(args);
 }
 
 /**
- * tokenize_command - Tokenize the command into arguments
- * @command: The command to tokenize
- *
- * Return: A NULL-terminated array of strings containing the arguments.
- *         NULL if memory allocation fails.
- */
+* tokenize_command - Tokenize the command into arguments
+* @command: The command to tokenize
+*
+* Return: A NULL-terminated array of strings containing the arguments.
+*         NULL if memory allocation fails.
+*/
 char **tokenize_command(char *command)
 {
-    char **args = malloc(BUFFER_SIZE * sizeof(char *));
-    int i = 0;
+char **args = malloc(BUFFER_SIZE * sizeof(char *));
+int i = 0;
 
-    if (!args)
-    {
-        return NULL;
-    }
+if (!args)
+{
+return NULL;
+}
 
-    char *token = strtok(command, " ");
-    while (token != NULL)
-    {
-        args[i] = token;
-        i++;
-        token = strtok(NULL, " ");
-    }
-    args[i] = NULL; /* Set the last element of the args array to NULL */
+char *token = strtok(command, " ");
+while (token != NULL)
+{
+args[i] = token;
+i++;
+token = strtok(NULL, " ");
+}
+args[i] = NULL; /* Set the last element of the args array to NULL */
 
-    return args;
+return args;
 }
 
 /**
- * execute_command_with_args - Execute the command with arguments
- * @args: The array of strings containing the command and its arguments
- */
+* execute_command_with_args - Execute the command with arguments
+* @args: The array of strings containing the command and its arguments
+*/
 void execute_command_with_args(char **args)
 {
-    pid_t pid = fork();
+pid_t pid = fork();
 
-    if (pid == 0) /* Child process */
-    {
-        if (execve(args[0], args, environ) == -1)
-        {
-            perror("Error");
-            exit(EXIT_FAILURE);
-        }
-    }
-    else if (pid < 0)
-    {
-        perror("Fork Error");
-    }
-    else
-    {
-        wait(NULL); /* Parent process waits for child to complete */
-    }
+if (pid == 0) /* Child process */
+{
+if (execve(args[0], args, environ) == -1)
+{
+perror("Error");
+exit(EXIT_FAILURE);
+}
+}
+else if (pid < 0)
+{
+perror("Fork Error");
+}
+else
+{
+wait(NULL); /* Parent process waits for child to complete */
+}
 =======
-	char *command;
+char *command;
 
-	while (1)
-	{
-		display_prompt();
-		command = read_command();
+while (1)
+{
+display_prompt();
+command = read_command();
 
-		if (!command)
-		{
-			printf("\n");
-			break;
-		}
+if (!command)
+{
+printf("\n");
+break;
+}
 
-		execute_command(command);
-		free(command);
-	}
+execute_command(command);
+free(command);
+}
 
 return (EXIT_SUCCESS);
 >>>>>>> refs/remotes/origin/master
