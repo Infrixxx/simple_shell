@@ -9,8 +9,7 @@
  */
 static int read_input(char *buffer, int buffer_size)
 {
-	int characters_read;
-	characters_read = read(STDIN_FILENO, buffer, buffer_size);
+	int characters_read = read(STDIN_FILENO, buffer, buffer_size);
 
 	if (characters_read <= 0)
 		return (-1);
@@ -22,6 +21,7 @@ static int read_input(char *buffer, int buffer_size)
  * process_input - Process the input buffer and extract a line.
  * @buffer: The buffer containing the input to process.
  * @buffer_size: The size of the buffer.
+ *
  * Return: Pointer to the line read from input, or NULL on failure.
  */
 static char *process_input(char *buffer, int buffer_size)
@@ -55,19 +55,37 @@ static char *process_input(char *buffer, int buffer_size)
 
 		if (i >= LINE_BUFFER_SIZE)
 		{
-			if (!(line = realloc(line, (i + LINE_BUFFER_SIZE) * sizeof(char))))
-			{
-				perror("Memory Allocation Error");
+			if (!realloc_line(&line, &i))
 				return (NULL);
-			}
 		}
 	}
 
 	if (buffer_index >= buffer_size)
 		buffer_index = 0;
 
-
 	return (line);
+}
+
+/**
+ * realloc_line - Reallocate the line buffer to extend its size.
+ * @line: Pointer to the line buffer.
+ * @i: Pointer to the current index in the buffer.
+ *
+ * Return: 1 on success, 0 on failure.
+ */
+static int realloc_line(char **line, int *i)
+{
+	char *new_line = realloc(*line, (*i + LINE_BUFFER_SIZE) * sizeof(char));
+	if (!new_line)
+	{
+		perror("Memory Allocation Error");
+		free(*line);
+		*line = NULL;
+		return (0);
+	}
+
+	*line = new_line;
+	return (1);
 }
 
 /**
@@ -80,7 +98,7 @@ char *custom_getline(void)
 {
 	static char buffer[BUFFER_SIZE];
 	int characters_read = read_input(buffer, BUFFER_SIZE);
-	
+
 	if (characters_read <= 0)
 		return (NULL);
 
