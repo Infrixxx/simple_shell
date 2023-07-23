@@ -18,7 +18,7 @@ char *custom_getline(void)
 
         if (characters_read <= 0)
         {
-            return NULL; // End of input or error occurred
+            return NULL;
         }
     }
 
@@ -41,7 +41,6 @@ char *custom_getline(void)
         i++;
         buffer_index++;
 
-        // If the line length exceeds BUFFER_SIZE, realloc the line
         if (i >= BUFFER_SIZE)
         {
             line = realloc(line, (i + BUFFER_SIZE) * sizeof(char));
@@ -53,12 +52,11 @@ char *custom_getline(void)
         }
     }
 
-    // If all characters are read from the buffer but line is not yet complete
     if (buffer_index >= characters_read)
     {
         characters_read = 0;
         buffer_index = 0;
     }
 
-    return line; // Return the line read
+    return line; 
 }
