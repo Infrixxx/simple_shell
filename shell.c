@@ -1,33 +1,52 @@
-#include "main.h"
+#include "shell.h"
 
-int main() {
-    char buffer[BUFFER_SIZE];
-    char prompt[] = "#cisfun$ ";
+/**
+ * main - Simple UNIX command line interpreter.
+ *
+ * Return: Always 0.
+ */
 
-    while (1) {
-        printf("%s", prompt);
+int main(void)
+{
+	char buffer[BUFFER_SIZE];
+	char *args[2];
+	int status;
+	pid_t child_pid;
 
-        if (fgets(buffer, BUFFER_SIZE, stdin) == NULL) {
-            printf("\n");
-            break;
-        }
+	while (1)
+	{
+		printf("#cisfun$ ");
 
-        buffer[strcspn(buffer, "\n")] = '\0';
-
-        pid_t pid = fork();
-
-        if (pid < 0) {
-            perror("Fork error");
-        } else if (pid == 0) {
-            if (execlp(buffer, buffer, (char *)NULL) == -1) {
-                perror(buffer);
-                exit(EXIT_FAILURE);
-            }
-        } else {
-            int status;
-            wait(&status);
-        }
-    }
-
-    return 0;
+		if (fgets(buffer, BUFFER_SIZE, stdin) == NULL)
+		{
+			printf("\n");
+			break;
+		}
+		buffer[strcspn(buffer, "\n")] = '\0';
+		if (strcmp(buffer, "exit") == 0)
+		{
+			break;
+		}
+		child_pid = fork();
+		if (child_pid < 0)
+		{
+			perror("fork");
+			exit(EXIT_FAILURE);
+		}
+		else if (child_pid == 0)
+		{
+			args[0] = buffer;
+			args[1] = NULL;
+			if (execve(args[0], args, environ) == -1)
+			{
+				perror(args[0]);
+			}
+			exit(EXIT_FAILURE);
+		}
+		else
+		{
+			waitpid(child_pid, &status, 0);
+		}
+	}
+	return (EXIT_SUCCESS);
 }
