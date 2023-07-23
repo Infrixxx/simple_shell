@@ -14,18 +14,18 @@ char **tokenize_command(char *command)
 
 	if (!args)
 	{
-		return NULL;
+		return (NULL);
 	}
 
 	char *token = strtok(command, " ");
-	
+
 	while (token != NULL)
 	{
 		args[i] = token;
 		i++;
 		token = strtok(NULL, " ");
 	}
-	args[i] = NULL; /* Set the last element of the args array to NULL */
+	args[i] = NULL;
 
-	return args;
+	return (args);
 }
