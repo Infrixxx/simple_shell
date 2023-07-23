@@ -25,4 +25,6 @@ To be able to incorporate current knowledge of C to build complex projects
 
 9. `tokenize_command.c`: This file contains the implementation of the `tokenize_command` function, which tokenizes a command into individual arguments.
 
+10. `env_builtin.c`: Contains the implementation of the `env_builtin()` function, which prints the current environment variables. 
+
 When you compile and link all these files together, you will have a complete Simple Shell program capable of accepting user commands, executing them (with or without arguments), displaying the prompt, and handling any errors that may occur during execution. The split-up implementation allows for better code organization and maintainability, making it easier to understand and modify specific parts of the shell functionality as needed.
