@@ -13,6 +13,7 @@
 /*MACROS */
 
 #define BUFFER_SIZE 1024
+#define LINE_BUFFER_SIZE 64
 
 /*Function prototypes*/
 void display_prompt(void);
