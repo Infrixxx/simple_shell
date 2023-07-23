@@ -7,6 +7,7 @@
  */
 void execute_command(char *command)
 {
+<<<<<<< HEAD
     char **args = tokenize_command(command);
 
     if (!args)
@@ -76,4 +77,24 @@ void execute_command_with_args(char **args)
     {
         wait(NULL); /* Parent process waits for child to complete */
     }
+=======
+	char *command;
+
+	while (1)
+	{
+		display_prompt();
+		command = read_command();
+
+		if (!command)
+		{
+			printf("\n");
+			break;
+		}
+
+		execute_command(command);
+		free(command);
+	}
+
+return (EXIT_SUCCESS);
+>>>>>>> refs/remotes/origin/master
 }
