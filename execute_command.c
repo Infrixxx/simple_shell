@@ -14,7 +14,6 @@ void execute_command(char *command)
 		perror("Memory Allocation Error");
 		return;
 	}
-
 	if (check_executable(args[0]))
 	{
 		execute_command_with_args(args);
