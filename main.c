@@ -21,7 +21,7 @@ int main(void)
 
 		execute_command(command);
 		free(command);
-	}	
+	}
 
 return (EXIT_SUCCESS);
 }
