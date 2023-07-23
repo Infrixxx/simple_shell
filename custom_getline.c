@@ -1,7 +1,5 @@
 #include "shell.h"
 
-#define BUFFER_SIZE 1024
-
 /**
  *custom_getline - Read a line of input from the standard input.
  * Return: On success, returns a pointer to the line read from input.
