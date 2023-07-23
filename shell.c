@@ -41,8 +41,8 @@ char **tokenize_command(char *command)
 	}
 
 	char *token = strtok(command, " ");
-	while (token != NULL)
 
+	while (token != NULL)
 	{
 		args[i] = token;
 		i++;
