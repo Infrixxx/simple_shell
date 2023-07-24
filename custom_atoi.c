@@ -8,28 +8,28 @@
  */
 int custom_atoi(const char *str)
 {
-        int result = 0;
-        int sign = 1;
-        int i = 0;
+	int result = 0;
+	int sign = 1;
+	int i = 0;
 
-        if (str[0] == '-')
-        {
-                sign = -1;
-                i++;
-        }
+	if (str[0] == '-')
+	{
+		sign = -1;
+		i++;
+	}
 
-        while (str[i] != '\0')
-        {
-                if (str[i] >= '0' && str[i] <= '9')
-                {
-                        result = result * 10 + (str[i] - '0');
-                }
-                else
-                {
-                        return (0);
-                }
-                i++;
-        }
+	while (str[i] != '\0')
+	{
+		if (str[i] >= '0' && str[i] <= '9')
+		{
+			result = result * 10 + (str[i] - '0');
+		}
+		else
+		{
+			return (0);
+		}
+		i++;
+	}
 
-        return (sign * result);
+	return (sign * result);
 }
