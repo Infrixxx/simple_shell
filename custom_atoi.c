@@ -1,3 +1,5 @@
+#include "shell.h"
+
 /**
  * custom_atoi - Custom implementation of the atoi function.
  * @str: The string to convert to an integer.
@@ -24,10 +26,10 @@ int custom_atoi(const char *str)
                 }
                 else
                 {
-                        return 0;
+                        return (0);
                 }
                 i++;
         }
 
-        return sign * result;
+        return (sign * result);
 }

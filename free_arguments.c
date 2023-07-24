@@ -5,12 +5,12 @@
  */
 void free_arguments(char **args)
 {
-        if (!args)
-                return;
+	if (!args)
+		return;
 
-        for (int i = 0; args[i]; i++)
-        {
-                free(args[i]);
-        }
-        free(args);
+	for (int i = 0; args[i]; i++)
+	{
+		free(args[i]);
+	}
+	free(args);
 }
