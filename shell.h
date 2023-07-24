@@ -26,7 +26,7 @@ void env_builtin(void);
 char *custom_getline(void);
 char *custom_strtok(char *str, const char *delimiters);
 int custom_atoi(const char *str);
-void free_arguments(char **args)
+void free_arguments(char **args);
 int setenv_builtin(char **args);
 int unsetenv_builtin(char **args);
 int execute_builtin(char **args);
