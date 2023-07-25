@@ -19,7 +19,6 @@ void execute_command(char *command)
 		free_arguments(args);
 		return;
 	}
-
 	if (strcmp(args[0], "exit") == 0)
 	{
 		int status = 0;
@@ -28,11 +27,9 @@ void execute_command(char *command)
 		{
 			status = custom_atoi(args[1]);
 		}
-
 		free_arguments(args);
 		exit(status);
 	}
-
 	if (strchr(command, ';'))
 	{
 		execute_commands_separated_by_semicolon(command);
@@ -49,12 +46,11 @@ void execute_command(char *command)
 	{
 		execute_single_command(args);
 	}
-
 	free_arguments(args);
 }
 
 /**
- * execute_single_command - Execute a single command without any logical operators
+ * execute_single_command - execute single command without any logical operators
  * @args: The command and its arguments as an array
  */
 void execute_single_command(char **args)
