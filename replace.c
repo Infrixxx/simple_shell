@@ -14,6 +14,7 @@ char *replace_variables(char *command)
 		return (NULL);
 
 	char *result = malloc(strlen(command) * sizeof(char) + 1);
+
 	if (result == NULL)
 		return (NULL);
 
