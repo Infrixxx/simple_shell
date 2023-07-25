@@ -6,7 +6,7 @@
  *
  * Return: The command with variables replaced, or NULL on failure.
  */
-char *replace_variables(char *command,int last_status_code)
+char *replace_variables(char *command, int last_status_code)
 {
 	if (!command)
 		return (NULL);
