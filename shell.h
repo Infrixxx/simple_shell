@@ -16,7 +16,7 @@
 #define LINE_BUFFER_SIZE 128
 
 /*Structure to hold an alias*/
-typedef struct Alias 
+typedef struct Alias
 {
 	char *name;
 	char *value;
