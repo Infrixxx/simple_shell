@@ -13,7 +13,6 @@ void execute_command(char *command)
 		perror("Memory Allocation Error");
 		return;
 	}
-
 	if (execute_builtin(args))
 	{
 		free_arguments(args);
@@ -50,7 +49,7 @@ void execute_command(char *command)
 }
 
 /**
- * execute_single_command - execute single command without any logical operators
+ * execute_single_command - execute single command without && ||
  * @args: The command and its arguments as an array
  */
 void execute_single_command(char **args)
