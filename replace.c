@@ -11,11 +11,11 @@ int last_status_code = 0;
 char *replace_variables(char *command)
 {
 	if (!command)
-		return NULL;
+		return (NULL);
 
 	char *result = malloc(strlen(command) + 1);
 	if (!result)
-		return NULL;
+		return (NULL);
 
 	char *p = command, *r = result, *value;
 	char variable[BUFFER_SIZE];
@@ -46,7 +46,7 @@ char *replace_variables(char *command)
 	}
 
 	*r = '\0';
-	return result;
+	return (result);
 }
 
 /**
