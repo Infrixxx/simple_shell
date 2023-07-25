@@ -14,6 +14,7 @@ char *replace_variables(char *command)
 		return (NULL);
 
 	char *result = malloc(strlen(command) + 1);
+
 	if (!result)
 		return (NULL);
 
@@ -26,6 +27,7 @@ char *replace_variables(char *command)
 		{
 			p++;
 			char *v = variable;
+
 			while (*p && isalnum(*p))
 				*v++ = *p++;
 			*v = '\0';
@@ -58,10 +60,12 @@ char *replace_variables(char *command)
 char *custom_itoa(int num)
 {
 	int len = snprintf(NULL, 0, "%d", num);
+
 	if (len <= 0)
 		return (NULL);
 
 	char *str = malloc(len + 1);
+
 	if (str == NULL)
 		return (NULL);
 
@@ -78,6 +82,7 @@ char *custom_itoa(int num)
 int custom_strlen(char **arr)
 {
 	int length = 0;
+
 	while (arr[length] != NULL)
 	{
 		length++;
