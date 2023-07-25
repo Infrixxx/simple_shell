@@ -7,7 +7,7 @@ To be able to incorporate current knowledge of C to build complex projects
 
 # Files : #
 
-## 1. `check_executable.c`: This file contains the implementation of the `check_executable` function, which checks if a given command is an executable file.
+## 1. `check_executable.c`: ## This file contains the implementation of the `check_executable` function, which checks if a given command is an executable file.
 
 ## 2. `execute_command.c`: This file contains the implementation of the `execute_command` function, which takes a command entered by the user and executes it.
 
