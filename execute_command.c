@@ -46,13 +46,14 @@ void execute_command(char *command)
 }
 
 /**
- * execute_commands_separated_by_semicolon - Execute commands separated by semicolon
+ * execute_commands_separated_by_semicolon - Execute commands separated by ;
  * @command: The command to execute
  */
 void execute_commands_separated_by_semicolon(char *command)
 {
 	char *token;
 	char *saveptr;
+
 	token = custom_strtok(command, ";", &saveptr);
 
 	while (token != NULL)
