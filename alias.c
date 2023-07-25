@@ -43,17 +43,17 @@ void add_alias(Alias **alias_list, char *name, char *value)
 char *get_alias_value(Alias *alias_list, char *name)
 {
 	if (alias_list == NULL || name == NULL)
-		return NULL;
+		return (NULL);
 
 	Alias *current = alias_list;
+
 	while (current != NULL)
 	{
 		if (strcmp(current->name, name) == 0)
 			return current->value;
 		current = current->next;
 	}
-
-	return NULL;
+	return (NULL);
 }
 
 /**
@@ -84,4 +84,48 @@ void print_aliases(Alias *alias_list, char **names)
 		}
 		current = current->next;
 	}
+}
+
+/**
+ * alias_builtin - Implement the alias built-in command.
+ * @args: The array of command arguments.
+ *
+ * Return: 1 if the command is a built-in and is executed, 0 otherwise.
+ */
+int alias_builtin(char **args)
+{
+	if (args[1] == NULL)
+	{
+		print_aliases(alias_list, NULL);
+	}
+	else
+	{
+		for (int i = 1; args[i] != NULL; i++)
+		{
+			char *name = args[i];
+			char *value = NULL;
+			char *equal_sign = strchr(args[i], '=');
+
+			if (equal_sign != NULL)
+			{
+				*equal_sign = '\0';
+				value = equal_sign + 1;
+			}
+			char *existing_value = get_alias_value(alias_list, name);
+			
+			if (existing_value)
+			{
+				free(existing_value);
+				existing_value = NULL;
+				if (value)
+					existing_value = strdup(value);
+				add_alias(&alias_list, name, existing_value);
+			}
+			else
+			{
+				add_alias(&alias_list, name, value);
+			}
+		}
+	}
+	return (1);
 }

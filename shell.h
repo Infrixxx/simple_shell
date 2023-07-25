@@ -22,6 +22,9 @@ typedef struct Alias {
     struct Alias *next;
 } Alias;
 
+/*LIST*/
+extern Alias *alias_list;
+
 /*Function prototypes*/
 void display_prompt(void);
 char *read_command(void);
@@ -45,5 +48,7 @@ void execute_single_command(char **args);
 void add_alias(Alias **alias_list, char *name, char *value);
 char *get_alias_value(Alias *alias_list, char *name);
 void print_aliases(Alias *alias_list, char **names);
+int alias_builtin(char **args);
 
 #endif /* SHELL_H */
+
