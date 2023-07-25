@@ -1,9 +1,5 @@
 #include "shell.h"
 
-/* Function prototypes */
-int execute_commands_from_file(const char *filename);
-int execute_interactive_shell();
-
 /**
  * main - Entry point for the Simple Shell program.
  * @argc: The number of command-line arguments.
@@ -14,11 +10,11 @@ int main(int argc, char *argv[])
 {
 	if (argc > 1)
 	{
-		return execute_commands_from_file(argv[1]);
+		return (execute_commands_from_file(argv[1]));
 	}
 	else
 	{
-		return execute_interactive_shell();
+		return (execute_interactive_shell());
 	}
 }
 
@@ -38,13 +34,14 @@ int execute_commands_from_file(const char *filename)
 	}
 
 	char line[LINE_BUFFER_SIZE];
+	char *pos;
 
 	while (fgets(line, LINE_BUFFER_SIZE, file) != NULL)
 	{
-		char *pos;
-
 		if ((pos = strchr(line, '\n')) != NULL)
+		{
 			*pos = '\0';
+		}
 		execute_command(line);
 	}
 
@@ -56,7 +53,7 @@ int execute_commands_from_file(const char *filename)
  * execute_interactive_shell - Execute an interactive shell.
  * Return: EXIT_SUCCESS (0) to indicate successful termination.
  */
-int execute_interactive_shell()
+int execute_interactive_shell(void)
 {
 	char *command;
 
@@ -74,5 +71,5 @@ int execute_interactive_shell()
 		free(command);
 	}
 
-	return 0;
+	return (0);
 }
