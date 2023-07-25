@@ -1,14 +1,12 @@
 #include "shell.h"
 
-int last_status_code = 0;
-
 /**
  * replace_variables - Replace variables in the command with their values.
  * @command: The command to process.
  *
  * Return: The command with variables replaced, or NULL on failure.
  */
-char *replace_variables(char *command)
+char *replace_variables(char *command,int last_status_code)
 {
 	if (!command)
 		return (NULL);
