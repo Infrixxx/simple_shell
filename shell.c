@@ -72,6 +72,7 @@ void execute_command_with_args(char **args)
 	if (pid == 0)
 	{
 		char **replaced_args = malloc((custom_strlen(args) + 1) * sizeof(char *));
+
 		if (!replaced_args)
 		{
 			perror("Memory Allocation Error");
