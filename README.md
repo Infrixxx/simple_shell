@@ -55,7 +55,7 @@ These functions handle the execution of built-in commands in the shell, making i
 
 3. `static char *get_oldpwd_directory(void)`: This is another helper function that retrieves the previous working directory path from the `OLDPWD` environment variable. If the variable is not set, it prints an error message to `stderr` and returns NULL.
 
-### 17 Alias.c
+### 17. `Alias.c`
 
 The `alias.c` file contains the implementation of the alias-related functions for a shell program. These functions handle adding, updating, and printing aliases stored in a linked list.
 
