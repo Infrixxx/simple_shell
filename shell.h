@@ -52,6 +52,7 @@ void print_aliases(Alias *alias_list, char **names);
 int alias_builtin(char **args);
 char *replace_variables(char *command);
 int custom_strlen(char **arr);
+void execute_child_process(char **args);
 
 #endif /* SHELL_H */
 

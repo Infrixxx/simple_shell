@@ -48,7 +48,7 @@ char **tokenize_command(char *command)
 		i++;
 		token = custom_strtok(NULL, " ");
 	}
-	args[i] = NULL; /* Set the last element of the args array to NULL */
+	args[i] = NULL;
 
 	return (args);
 }
@@ -71,35 +71,7 @@ void execute_command_with_args(char **args)
 
 	if (pid == 0)
 	{
-		char **replaced_args = malloc((custom_strlen(args) + 1) * sizeof(char *));
-
-		if (!replaced_args)
-		{
-			perror("Memory Allocation Error");
-			free(replaced_command);
-			return;
-		}
-
-		for (int i = 0; args[i] != NULL; i++)
-		{
-			replaced_args[i] = replace_variables(args[i]);
-			if (!replaced_args[i])
-			{
-				perror("Memory Allocation Error");
-				free(replaced_command);
-				free_arguments(replaced_args);
-				exit(EXIT_FAILURE);
-			}
-		}
-		replaced_args[custom_strlen(args)] = NULL;
-
-		if (execvp(replaced_args[0], replaced_args) == -1)
-		{
-			perror("Error");
-			free(replaced_command);
-			free_arguments(replaced_args);
-			exit(EXIT_FAILURE);
-		}
+		execute_child_process(args);
 	}
 	else if (pid < 0)
 	{
@@ -111,4 +83,39 @@ void execute_command_with_args(char **args)
 	}
 
 	free(replaced_command);
+}
+
+/**
+ * execute_child_process - Execute the child process with replaced arguments
+ * @args: The array of strings containing the command and its arguments
+ */
+void execute_child_process(char **args)
+{
+	char **replaced_args = malloc((custom_strlen(args) + 1) * sizeof(char *));
+	if (!replaced_args)
+	{
+		perror("Memory Allocation Error");
+		exit(EXIT_FAILURE);
+	}
+
+	for (int i = 0; args[i] != NULL; i++)
+	{
+		replaced_args[i] = replace_variables(args[i]);
+		if (!replaced_args[i])
+		{
+			perror("Memory Allocation Error");
+			free_arguments(replaced_args);
+			exit(EXIT_FAILURE);
+		}
+	}
+	replaced_args[custom_strlen(args)] = NULL;
+
+	if (execvp(replaced_args[0], replaced_args) == -1)
+	{
+		perror("Error");
+		free_arguments(replaced_args);
+		exit(EXIT_FAILURE);
+	}
+
+	free_arguments(replaced_args);
 }
