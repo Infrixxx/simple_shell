@@ -50,6 +50,8 @@ void add_alias(Alias **alias_list, char *name, char *value);
 char *get_alias_value(Alias *alias_list, char *name);
 void print_aliases(Alias *alias_list, char **names);
 int alias_builtin(char **args);
+char *replace_variables(char *command);
+int custom_strlen(char **arr);
 
 #endif /* SHELL_H */
 
