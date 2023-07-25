@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 	if (argc > 1)
 	{
 		FILE *file = fopen(argv[1], "r");
+
 		if (!file)
 		{
 			perror("Error opening file");
@@ -18,15 +19,15 @@ int main(int argc, char *argv[])
 		}
 
 		char line[LINE_BUFFER_SIZE];
+
 		while (fgets(line, LINE_BUFFER_SIZE, file) != NULL)
 		{
 			char *pos;
+
 			if ((pos = strchr(line, '\n')) != NULL)
 				*pos = '\0';
-
 			execute_command(line);
 		}
-
 		fclose(file);
 	}
 	else
@@ -43,11 +44,9 @@ int main(int argc, char *argv[])
 				printf("\n");
 				break;
 			}
-
 			execute_command(command);
 			free(command);
 		}
 	}
-
 	return (0);
 }
