@@ -12,6 +12,7 @@ void add_alias(Alias **alias_list, char *name, char *value)
 		return;
 
 	Alias *current = *alias_list;
+
 	while (current != NULL)
 	{
 		if (strcmp(current->name, name) == 0)
@@ -24,6 +25,7 @@ void add_alias(Alias **alias_list, char *name, char *value)
 	}
 
 	Alias *new_alias = malloc(sizeof(Alias));
+
 	if (new_alias == NULL)
 		return;
 
@@ -50,7 +52,7 @@ char *get_alias_value(Alias *alias_list, char *name)
 	while (current != NULL)
 	{
 		if (strcmp(current->name, name) == 0)
-			return current->value;
+			return (current->value);
 		current = current->next;
 	}
 	return (NULL);
@@ -72,6 +74,7 @@ void print_aliases(Alias *alias_list, char **names)
 		else
 		{
 			char **name_ptr = names;
+
 			while (*name_ptr != NULL)
 			{
 				if (strcmp(current->name, *name_ptr) == 0)
@@ -112,7 +115,7 @@ int alias_builtin(char **args)
 				value = equal_sign + 1;
 			}
 			char *existing_value = get_alias_value(alias_list, name);
-			
+
 			if (existing_value)
 			{
 				free(existing_value);
