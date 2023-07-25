@@ -34,4 +34,5 @@ int cd_builtin(char **args);
 void execute_commands_separated_by_semicolon(char *command);
 void execute_commands_separated_by_logical_and(char *command);
 void execute_commands_separated_by_logical_or(char *command);
+void execute_single_command(char **args)
 #endif /* SHELL_H */
