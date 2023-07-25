@@ -10,60 +10,43 @@ int last_status_code = 0;
  */
 char *replace_variables(char *command)
 {
-	if (command == NULL)
-		return (NULL);
+    if (!command)
+        return NULL;
 
-	char *result = malloc(strlen(command) * sizeof(char) + 1);
+    char *result = malloc(strlen(command) + 1);
+    if (!result)
+        return NULL;
 
-	if (result == NULL)
-		return (NULL);
+    char *p = command, *r = result, *value;
+    char variable[BUFFER_SIZE];
 
-	char *p = command;
-	char *r = result;
-	char *value;
-	char variable[BUFFER_SIZE];
+    while (*p)
+    {
+        if (*p == '$')
+        {
+            p++;
+            char *v = variable;
+            while (*p && isalnum(*p))
+                *v++ = *p++;
+            *v = '\0';
 
-	while (*p)
-	{
-		if (*p == '$')
-		{
-			p++;
-			char *v = variable;
-			while (*p && isalnum(*p))
-			{
-				*v++ = *p++;
-			}
-			*v = '\0';
+            if (strcmp(variable, "?") == 0)
+                value = custom_itoa(last_status_code);
+            else if (strcmp(variable, "$") == 0)
+                value = custom_itoa(getpid());
+            else
+                value = getenv(variable);
 
-			if (strcmp(variable, "?") == 0)
-			{
-				value = custom_itoa(last_status_code);
-			}
-			else if (strcmp(variable, "$") == 0)
-			{
-				value = custom_itoa(getpid());
-			}
-			else
-			{
-				value = getenv(variable);
-			}
+            if (value)
+                while (*value)
+                    *r++ = *value++;
+        }
+        else
+            *r++ = *p++;
+    }
 
-			if (value != NULL)
-			{
-				while (*value)
-				{
-					*r++ = *value++;
-				}
-			}
-		}
-		else
-		{
-			*r++ = *p++;
-		}
-	}
-
-	*r = '\0';
-	return (result);
+    *r = '\0';
+    return result;
 }
 
 /**
