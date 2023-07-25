@@ -30,7 +30,7 @@ int execute_commands_from_file(const char *filename)
 	if (!file)
 	{
 		perror("Error opening file");
-		return 1;
+		return (1);
 	}
 
 	char line[LINE_BUFFER_SIZE];
@@ -38,7 +38,8 @@ int execute_commands_from_file(const char *filename)
 
 	while (fgets(line, LINE_BUFFER_SIZE, file) != NULL)
 	{
-		if ((pos = strchr(line, '\n')) != NULL)
+		pos = strchr(line, '\n');
+		if (pos != NULL)
 		{
 			*pos = '\0';
 		}
@@ -46,7 +47,7 @@ int execute_commands_from_file(const char *filename)
 	}
 
 	fclose(file);
-	return 0;
+	return (0);
 }
 
 /**
