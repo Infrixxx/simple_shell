@@ -1,76 +1,44 @@
 #include "shell.h"
 
 /**
- * main - Entry point for the Simple Shell program.
- * @argc: The number of command-line arguments.
- * @argv: An array of pointers to command-line arguments.
- * Return: EXIT_SUCCESS (0) to indicate successful termination.
+ * main - entry point
+ * @ac: arg count
+ * @av: arg vector
+ *
+ * Return: 0 on success, 1 on error
  */
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-	if (argc > 1)
-	{
-		return (execute_commands_from_file(argv[1]));
-	}
-	else
-	{
-		return (execute_interactive_shell());
-	}
-}
+	info_t info[] = { INFO_INIT };
+	int fd = 2;
 
-/**
- * execute_commands_from_file - Execute commands from a file.
- * @filename: The name of the file containing commands.
- * Return: 0 on success, 1 on failure.
- */
-int execute_commands_from_file(const char *filename)
-{
-	FILE *file = fopen(filename, "r");
+	asm ("mov %1, %0\n\t"
+			"add $3, %0"
+			: "=r" (fd)
+			: "r" (fd));
 
-	if (!file)
+	if (ac == 2)
 	{
-		perror("Error opening file");
-		return (1);
-	}
-
-	char line[LINE_BUFFER_SIZE];
-	char *pos;
-
-	while (fgets(line, LINE_BUFFER_SIZE, file) != NULL)
-	{
-		pos = strchr(line, '\n');
-		if (pos != NULL)
+		fd = open(av[1], O_RDONLY);
+		if (fd == -1)
 		{
-			*pos = '\0';
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				_eputs(av[0]);
+				_eputs(": 0: Can't open ");
+				_eputs(av[1]);
+				_eputchar('\n');
+				_eputchar(BUF_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
 		}
-		execute_command(line);
+		info->readfd = fd;
 	}
-
-	fclose(file);
-	return (0);
-}
-
-/**
- * execute_interactive_shell - Execute an interactive shell.
- * Return: EXIT_SUCCESS (0) to indicate successful termination.
- */
-int execute_interactive_shell(void)
-{
-	char *command;
-
-	while (1)
-	{
-		display_prompt();
-		command = custom_getline();
-
-		if (!command)
-		{
-			printf("\n");
-			break;
-		}
-		execute_command(command);
-		free(command);
-	}
-
-	return (0);
+	populate_env_list(info);
+	read_history(info);
+	hsh(info, av);
+	return (EXIT_SUCCESS);
 }
